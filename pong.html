@@ -42,8 +42,8 @@
 		canvas = document.getElementById('gameCanvas');
 		canvasContext = canvas.getContext('2d');
 		
-		canvas.width  = window.innerWidth-16;
-		canvas.height = window.innerHeight-16;
+		canvas.width = window.innerWidth - 16;
+		canvas.height = window.innerHeight - 16;
 		
 		ballReset();
 		
@@ -135,7 +135,9 @@
 			ballSpeedY = reflectY * 0.35;
 		}
 		// R Wall
-		if (ballX >= canvas.width /*- 10*/) {
+		if (ballX >= canvas.width /*- 10*/
+		)
+		{
 			scoreL++;
 			ballReset();
 		}
@@ -156,7 +158,9 @@
 		if (ballY >= canvas.height - 10) {
 			ballSpeedY = -ballSpeedY;
 		}
-		if (ballY <= -5 /*0*/) {
+		if (ballY <= -5 /*0*/
+		)
+		{
 			ballSpeedY = -ballSpeedY;
 		}
 		ballY += ballSpeedY;
@@ -181,10 +185,10 @@
 	}
 	
 	function drawEverything() {
-		framecount ++;
+		framecount++;
 		if (framecount >= fps) {
-			canvas.width = window.innerWidth-16;
-			canvas.height = window.innerHeight-16;
+			canvas.width = window.innerWidth - 16;
+			canvas.height = window.innerHeight - 16;
 			framecount = 0;
 		}
 		drawColourRect(0, 0, canvas.width, canvas.height, 'black'); // Black BG
