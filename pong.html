@@ -20,6 +20,7 @@
 	var showingWinScreen = true;
 	var first = true;
 	var fps = 30;
+	var framecount = 0;
 	
 	function calculateMousePos(evt) {
 		var rect = canvas.getBoundingClientRect();
@@ -180,8 +181,12 @@
 	}
 	
 	function drawEverything() {
-		canvas.width  = window.innerWidth-16;
-		canvas.height = window.innerHeight-16;
+		framecount ++;
+		if (framecount >= fps) {
+			canvas.width = window.innerWidth-16;
+			canvas.height = window.innerHeight-16;
+			framecount = 0;
+		}
 		drawColourRect(0, 0, canvas.width, canvas.height, 'black'); // Black BG
 		drawColourRect(5, paddleL, 10, paddleHeight, 'white'); // L Paddle
 		drawColourRect(canvas.width - 15, paddleR, 10, paddleHeight, 'white'); // R Paddle
