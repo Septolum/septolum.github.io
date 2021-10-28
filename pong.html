@@ -1,209 +1,221 @@
 <html style="width: 100% height: 100%; display: block; margin: 0 auto;">
-<canvas id="gameCanvas" <--width="800" height="600"--/> ></canvas>
-<script>
-	var canvas;
-	var canvasContext;
-	var ballX = 500;
-	var ballY = 300;
-	var ballSpeedX = 2.5;
-	var ballSpeedY = 1
-	var ballSpeedXMulti = 1;
-	var ballSpeedYMulti = 1;
-	var paddleL = 250;
-	var paddleR = 250;
-	var use_AI = true;
-	var aiSpeed = 20;
-	var paddleHeight = 100;
-	var scoreL = 0;
-	var scoreR = 0;
-	var scoreWin = 15;
-	var showingWinScreen = true;
-	var first = true;
-	var fps = 60;
-	var framecount = 0;
-	
-	function calculateMousePos(evt) {
-		var rect = canvas.getBoundingClientRect();
-		var root = document.documentElement;
-		var mouseX = evt.clientX - rect.left - root.scrollLeft;
-		var mouseY = evt.clientY - rect.top - root.scrollTop;
-		return {
-			x : mouseX,
-			y : mouseY
-		};
-	}
-	
-	function getRandomInt(min, max) {
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
-	
-	window.onload = function () {
-		console.log('Hello World');
-		canvas = document.getElementById('gameCanvas');
-		canvasContext = canvas.getContext('2d');
-		
-		canvas.width = window.innerWidth - 16;
-		canvas.height = window.innerHeight - 16;
-		
-		ballReset();
-		
-		setInterval(function () {
-			moveEverything();
-			drawEverything();
-			ballSpeedXMulti *= 1.000005
-			ballSpeedYMulti *= 1.000005
-			ballSpeedX *= ballSpeedXMulti;
-			ballSpeedY *= ballSpeedYMulti;
-		}, 1000 / fps);
-		
-		canvas.addEventListener('mousemove',
-			function (evt) {
-			var mousePos = calculateMousePos(evt);
-			if (showingWinScreen == false) {
-				paddleL = mousePos.y - (paddleHeight / 2);
-			}
-		});
-		
-		canvas.addEventListener('mousedown', function (evt) {
-			if (showingWinScreen) {
-				showingWinScreen = false;
-				scoreL = 0;
-				scoreR = 0;
-				ballSpeedXMulti = 1;
-				ballSpeedYMulti = 1;
-			}
-		});
-	}
-	
-	function ballReset() {
-		ballX = canvas.width / 2;
-		ballY = canvas.height / 2;
-		if (scoreL >= scoreWin || scoreR >= scoreWin) {
-			showingWinScreen = true;
-			first = false;
-			paddleL = canvas.height / 2 - paddleHeight / 2;
-			paddleR = canvas.height / 2 - paddleHeight / 2;
-			
-		}
-		if (ballSpeedXMulti >= 2) {
-			ballSpeedXMulti *= 0.5;
-		}
-		if (ballSpeedYMulti >= 2) {
-			ballSpeedYMulti *= 0.5;
-		}
-		
-		ballSpeedX = getRandomInt(-8, 8) * ballSpeedXMulti;
-		ballSpeedY = getRandomInt(-8, 8) * ballSpeedYMulti;
-		while ((ballSpeedX < 5 && ballSpeedX > -5) || (ballSpeedY < 5 && ballSpeedY > -5)) {
-			ballSpeedX = getRandomInt(-8, 8) * ballSpeedXMulti;
-			ballSpeedY = getRandomInt(-8, 8) * ballSpeedYMulti;
-		}
-	}
-	
-	function AI() {
-		var diffTop;
-		var diffBottom;
-		if (paddleR + paddleHeight - 7 /*aiSpeed/2*/
-			 < ballY) {
-			diffBottom = ballY - (paddleR + paddleHeight / 2);
-			if (diffBottom <= aiSpeed) {
-				paddleR += diffBottom;
-			} else {
-				paddleR += aiSpeed;
-			}
-		}
-		if (paddleR + 7 /*aiSpeed/2*/
-			 > ballY) {
-			diffTop = (paddleR + paddleHeight / 2) - ballY;
-			if (diffTop <= aiSpeed) {
-				paddleR -= diffTop;
-			} else {
-				paddleR = paddleR - aiSpeed;
-			}
-		}
-	}
-	
-	function moveEverything() {
-		if (showingWinScreen) {
-			return;
-		}
-		// X
-		// R Paddle
-		if (ballX >= canvas.width - 25 && ballY + 5 > paddleR && ballY + 5 < paddleR + paddleHeight) {
-			ballSpeedX = -ballSpeedX;
-			var reflectY = ballY + 5 - (paddleR + paddleHeight / 2);
-			ballSpeedY = reflectY * 0.35;
-		}
-		// R Wall
-		if (ballX >= canvas.width /*- 10*/
-		)
-		{
-			scoreL++;
-			ballReset();
-		}
-		// L Paddle
-		if (ballX <= 15 && ballY + 5 > paddleL && ballY + 5 < paddleL + paddleHeight) {
-			ballSpeedX = -ballSpeedX;
-			var reflectY = ballY + 5 - (paddleL + paddleHeight / 2);
-			ballSpeedY = reflectY * 0.35;
-		}
-		// L Wall
-		if (ballX <= 0) {
-			scoreR++;
-			ballReset();
-		}
-		ballX += ballSpeedX;
-		
-		// Y
-		if (ballY >= canvas.height - 10) {
-			ballSpeedY = -ballSpeedY;
-		}
-		if (ballY <= -5 /*0*/
-		)
-		{
-			ballSpeedY = -ballSpeedY;
-		}
-		ballY += ballSpeedY;
-		
-		// Paddle R
-		if (use_AI != true) {
-			paddleR = paddleL;
-		} else {
-			AI();
-		}
-	}
-	
-	function drawColourRect(x, y, w, h, colour) {
-		canvasContext.fillStyle = colour;
-		canvasContext.fillRect(x, y, w, h);
-	}
-	
-	function drawNet() {
-		for (var i = 0; i < canvas.height; i += 40) {
-			drawColourRect(canvas.width / 2 - 1, i, 2, 20, 'white');
-		}
-	}
-	
-	function drawEverything() {
-		framecount++;
-		if (framecount >= fps) {
-			canvas.width = window.innerWidth - 16;
-			canvas.height = window.innerHeight - 16;
-			framecount = 0;
-		}
-		drawColourRect(0, 0, canvas.width, canvas.height, 'black'); // Black BG
-		drawColourRect(5, paddleL, 10, paddleHeight, 'white'); // L Paddle
-		drawColourRect(canvas.width - 15, paddleR, 10, paddleHeight, 'white'); // R Paddle
-		canvasContext.fillText(scoreL, canvas.width / 4, canvas.height / 4);
-		canvasContext.fillText(scoreR, 3 * canvas.width / 4, canvas.height / 4);
-		if (showingWinScreen) {
-			if (first == false) {
-				canvasContext.fillText("Winner!", canvas.width / 2 - 20, canvas.height / 8);
-			}
-			canvasContext.fillText("Click to restart", canvas.width / 2 - 30, canvas.height / 2);
-			return;
-		}
-		drawNet();
-		drawColourRect(ballX, ballY, 10, 10, 'orange'); // Ball
-	}
-</script>
+  <canvas id="gameCanvas" <--width="800" height="600" --\> ></canvas>
+  <script>
+    var canvas;
+    var canvasContext;
+    var ballX = 500;
+    var ballY = 300;
+    var ballSpeedX = 2.5;
+    var ballSpeedY = 1;
+    var ballSpeedXMulti = 1;
+    var ballSpeedYMulti = 1;
+    var paddleL = 250;
+    var paddleR = 250;
+    var use_AI = true;
+    var aiSpeed = 20;
+    var paddleHeight = 100;
+    var scoreL = 0;
+    var scoreR = 0;
+    var scoreWin = 15;
+    var showingWinScreen = true;
+    var first = true;
+    var fps = 60;
+    var framecount = 0;
+
+    function calculateMousePos(evt) {
+      var rect = canvas.getBoundingClientRect();
+      var root = document.documentElement;
+      var mouseX = evt.clientX - rect.left - root.scrollLeft;
+      var mouseY = evt.clientY - rect.top - root.scrollTop;
+      return {
+        x: mouseX,
+        y: mouseY,
+      };
+    }
+
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    window.onload = function () {
+      console.log("Hello World");
+      canvas = document.getElementById("gameCanvas");
+      canvasContext = canvas.getContext("2d");
+
+      canvas.width = window.innerWidth - 16;
+      canvas.height = window.innerHeight - 16;
+
+      ballReset();
+
+      setInterval(function () {
+        moveEverything();
+        drawEverything();
+        ballSpeedXMulti *= 1.000005;
+        ballSpeedYMulti *= 1.000005;
+        ballSpeedX *= ballSpeedXMulti;
+        ballSpeedY *= ballSpeedYMulti;
+      }, 1000 / fps);
+
+      canvas.addEventListener("mousemove", function (evt) {
+        var mousePos = calculateMousePos(evt);
+        if (showingWinScreen == false) {
+          paddleL = mousePos.y - paddleHeight / 2;
+        }
+      });
+
+      canvas.addEventListener("mousedown", function (evt) {
+        if (showingWinScreen) {
+          showingWinScreen = false;
+          scoreL = 0;
+          scoreR = 0;
+          ballSpeedXMulti = 1;
+          ballSpeedYMulti = 1;
+        }
+      });
+    };
+
+    function ballReset() {
+      ballX = canvas.width / 2;
+      ballY = canvas.height / 2;
+      if (scoreL >= scoreWin || scoreR >= scoreWin) {
+        showingWinScreen = true;
+        first = false;
+        paddleL = canvas.height / 2 - paddleHeight / 2;
+        paddleR = canvas.height / 2 - paddleHeight / 2;
+      }
+      if (ballSpeedXMulti >= 2) {
+        ballSpeedXMulti *= 0.5;
+      }
+      if (ballSpeedYMulti >= 2) {
+        ballSpeedYMulti *= 0.5;
+      }
+
+      ballSpeedX = getRandomInt(-8, 8) * ballSpeedXMulti;
+      ballSpeedY = getRandomInt(-8, 8) * ballSpeedYMulti;
+      while (
+        (ballSpeedX < 5 && ballSpeedX > -5) ||
+        (ballSpeedY < 5 && ballSpeedY > -5)
+      ) {
+        ballSpeedX = getRandomInt(-8, 8) * ballSpeedXMulti;
+        ballSpeedY = getRandomInt(-8, 8) * ballSpeedYMulti;
+      }
+    }
+
+    function AI() {
+      var diffTop;
+      var diffBottom;
+      if (paddleR + paddleHeight - 7 /*aiSpeed/2*/ < ballY) {
+        diffBottom = ballY - (paddleR + paddleHeight / 2);
+        if (diffBottom <= aiSpeed) {
+          paddleR += diffBottom;
+        } else {
+          paddleR += aiSpeed;
+        }
+      }
+      if (paddleR + 7 /*aiSpeed/2*/ > ballY) {
+        diffTop = paddleR + paddleHeight / 2 - ballY;
+        if (diffTop <= aiSpeed) {
+          paddleR -= diffTop;
+        } else {
+          paddleR = paddleR - aiSpeed;
+        }
+      }
+    }
+
+    function moveEverything() {
+      if (showingWinScreen) {
+        return;
+      }
+      // X
+      // R Paddle
+      if (
+        ballX >= canvas.width - 25 &&
+        ballY + 5 > paddleR &&
+        ballY + 5 < paddleR + paddleHeight
+      ) {
+        ballSpeedX = -ballSpeedX;
+        var reflectY = ballY + 5 - (paddleR + paddleHeight / 2);
+        ballSpeedY = reflectY * 0.35;
+      }
+      // R Wall
+      if (ballX >= canvas.width /*- 10*/) {
+        scoreL++;
+        ballReset();
+      }
+      // L Paddle
+      if (
+        ballX <= 15 &&
+        ballY + 5 > paddleL &&
+        ballY + 5 < paddleL + paddleHeight
+      ) {
+        ballSpeedX = -ballSpeedX;
+        var reflectY = ballY + 5 - (paddleL + paddleHeight / 2);
+        ballSpeedY = reflectY * 0.35;
+      }
+      // L Wall
+      if (ballX <= 0) {
+        scoreR++;
+        ballReset();
+      }
+      ballX += ballSpeedX;
+
+      // Y
+      if (ballY >= canvas.height - 10) {
+        ballSpeedY = -ballSpeedY;
+      }
+      if (ballY <= -5 /*0*/) {
+        ballSpeedY = -ballSpeedY;
+      }
+      ballY += ballSpeedY;
+
+      // Paddle R
+      if (use_AI != true) {
+        paddleR = paddleL;
+      } else {
+        AI();
+      }
+    }
+
+    function drawColourRect(x, y, w, h, colour) {
+      canvasContext.fillStyle = colour;
+      canvasContext.fillRect(x, y, w, h);
+    }
+
+    function drawNet() {
+      for (var i = 0; i < canvas.height; i += 40) {
+        drawColourRect(canvas.width / 2 - 1, i, 2, 20, "white");
+      }
+    }
+
+    function drawEverything() {
+      framecount++;
+      if (framecount >= fps) {
+        canvas.width = window.innerWidth - 16;
+        canvas.height = window.innerHeight - 16;
+        framecount = 0;
+      }
+      drawColourRect(0, 0, canvas.width, canvas.height, "black"); // Black BG
+      drawColourRect(5, paddleL, 10, paddleHeight, "white"); // L Paddle
+      drawColourRect(canvas.width - 15, paddleR, 10, paddleHeight, "white"); // R Paddle
+      canvasContext.fillText(scoreL, canvas.width / 4, canvas.height / 4);
+      canvasContext.fillText(scoreR, (3 * canvas.width) / 4, canvas.height / 4);
+      if (showingWinScreen) {
+        if (first == false) {
+          canvasContext.fillText(
+            "Winner!",
+            canvas.width / 2 - 20,
+            canvas.height / 8
+          );
+        }
+        canvasContext.fillText(
+          "Click to restart",
+          canvas.width / 2 - 30,
+          canvas.height / 2
+        );
+        return;
+      }
+      drawNet();
+      drawColourRect(ballX, ballY, 10, 10, "orange"); // Ball
+    }
+  </script>
+</html>
