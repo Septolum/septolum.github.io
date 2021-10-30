@@ -129,7 +129,7 @@ ALDI I have less good experience with, their veggie/vegan range of ready meals I
 - Soy Sauce
 - Misc. Frozen Ready Meals
 - Frozen Pizza
-- Frozen Veggie Burgers or Equiv
+- Frozen Veggie Burgers or Equivalent
 
 ### Basic Utensils (ones I use the most often)
 - Microwavable Soup Bowl
