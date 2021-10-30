@@ -1,6 +1,8 @@
+---
 layout: page
 title: "Recipes for People with Low to Zero Energy"
 permalink: /recipes/
+---
 
 In no particular order
 - [Preface](#preface)

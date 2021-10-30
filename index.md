@@ -1,5 +1,6 @@
+---
 title: "Welcome to my page!"
-
+---
 
 There's not much here yet, but hopefully there'll be more soon :)
 
