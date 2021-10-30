@@ -38,7 +38,7 @@ If you want a little more, have it with some buttered toast, I haven't found a s
 Speaking of toast...
 
 ### Toast
-Buy a big ol' sliced loaf in a supermarket, and pop it in the freezer. After some trail and error adjusting settings on your toaster, you can get perfect toast every time from frozen.
+Buy a big ol' sliced loaf in a supermarket, and pop it in the freezer. After some trial and error adjusting settings on your toaster, you can get perfect toast every time from frozen.
 
 The possibilities of toast toppings are probably endless, but my favourites are peanut butter, peanut butter with sliced banana, and cheese and pickle. Plus, beans on toast is a great quick hot meal especially with sliced cheese.
 
