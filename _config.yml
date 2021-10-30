@@ -1,5 +1,12 @@
 title: Septolum (Nat Marriage)
 description: Welcome!
+
+url: "https://septolum.github.io/recipes"
+
+twitter_username: Septolum
+
+github_username: Septolum
+
 google_analytics: UA-211608587-1
 show_downloads: false
 theme: jekyll-theme-slate
