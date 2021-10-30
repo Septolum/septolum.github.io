@@ -1,5 +1,7 @@
 ---
+layout: page
 title: "Welcome to my page!"
+permalink: /
 ---
 
 There's not much here yet, but hopefully there'll be more soon :)
