@@ -8,7 +8,4 @@ twitter_username: Septolum
 github_username: Septolum
 
 show_downloads: false
-theme: jekyll-theme-slate
-
-gems:
-  - jekyll-mentions
+theme: minima
