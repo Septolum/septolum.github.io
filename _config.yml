@@ -2,7 +2,12 @@ theme: minima
 
 title: Septolum (Nat Marriage)
 
-url: "https://septolum.github.io"
+description: My homepage for occasional posts
+
+base_url: "https://septolum.github.io"
+
+author:
+  email: septolum@gmail.com
 
 twitter_username: Septolum
 
