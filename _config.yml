@@ -7,6 +7,7 @@ description: My homepage for occasional posts
 base_url: "https://septolum.github.io"
 
 author:
+  name: ""
   email: septolum@gmail.com
 
 twitter_username: Septolum
