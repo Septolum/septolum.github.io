@@ -26,10 +26,10 @@ In no particular order
 I have a long term health condition called [POTS](https://www.potsuk.org/) that often leaves me with little energy to cook healthy meals for myself. I am compiling some of the recipes I have found that are nice tasting, relatively healthy, and most importantly super easy, for those in a similar boat to me.
 
 A few stipulations:
- - I am vegetarian
- - I live in the UK
- - I usually shop at ALDI and Iceland, so a lot of recipes will be based off what they offer, and some may no longer be possible if they stop selling a certain ingredient (e.g. a specific spice mix packet)
- - My typical portion size is large, usually 1.5-2 times the recommended portion on food packets e.g. pasta
+- I am vegetarian
+- I live in the UK
+- I usually shop at ALDI and Iceland, so a lot of recipes will be based off what they offer, and some may no longer be possible if they stop selling a certain ingredient (e.g. a specific spice mix packet)
+- My typical portion size is large, usually 1.5-2 times the recommended portion on food packets e.g. pasta
 
 ## Recipes
 
