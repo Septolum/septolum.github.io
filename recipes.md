@@ -18,7 +18,7 @@ In no particular order
   - [Pasta](#pasta)
   - [Rice](#rice)
   - [Frozen Ready Meals](#frozen-ready-meals)
-- [TLDR/Ingredients & Utensil  List](#tldringredients--utensil--list)
+- [TLDR/Ingredients & Utensil List](#tldringredients--utensil-list)
   - [Staple Ingredients (ones I usually have in my cupboards/freezer)](#staple-ingredients-ones-i-usually-have-in-my-cupboardsfreezer)
   - [Basic Utensils (ones I use the most often)](#basic-utensils-ones-i-use-the-most-often)
 
@@ -91,7 +91,7 @@ I usually buy stir fry sauce packets from ALDI, and I add the sauce near the end
 
 As for noodles, I use "Ready to Wok" noodles from ALDI, which require no prep at all, just add them half way through cooking.
 
-Speaking of Woks, using a medium Wok or Wok style frying pan is so much better for doing stir frys  than a normal frying pan, along with just a basic wooden spatula.
+Speaking of Woks, using a medium Wok or Wok style frying pan is so much better for doing stir frys than a normal frying pan, along with just a basic wooden spatula.
 
 ### Pasta
 Pasta is very easy to make, just follow the instructions on the packet. It's easy to make extra too, if you want to refrigerate or freeze some for later as a homemeade ready meal.
@@ -116,7 +116,7 @@ Iceland is great for these, there's so much choice, they taste good, and they're
 
 ALDI I have less good experience with, their veggie/vegan range of ready meals I've found are a bit tasteless. The veggie pizzas are okay, but unless you're going with the higher quality/price ones, I'd go with Iceland's frozen pizzas.
 
-## TLDR/Ingredients & Utensil  List
+## TLDR/Ingredients & Utensil List
 
 ### Staple Ingredients (ones I usually have in my cupboards/freezer)
 - Frozen Veg
