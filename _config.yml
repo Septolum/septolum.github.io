@@ -12,6 +12,10 @@ email: septolum@gmail.com
 
 twitter_username: Septolum
 
+mastodon:
+ - username: Septolum
+   instance: social.vivaldi.net
+
 github_username: Septolum
 
 header_pages:
